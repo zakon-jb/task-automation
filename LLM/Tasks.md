@@ -1,0 +1,5 @@
+- [ ] Rename JBAIP project
+- [ ] Finalize business process - keep only important stuff
+- [ ] Testing workflow
+- [ ] Automation
+- [ ] Pre-planning (product backlog)
