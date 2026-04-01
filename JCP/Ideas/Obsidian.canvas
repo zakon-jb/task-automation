@@ -1,0 +1,12 @@
+{
+	"nodes":[
+		{"id":"eae13a928cdd09ac","type":"text","text":"Setup Git repo","x":-430,"y":-140,"width":250,"height":60,"color":"4"},
+		{"id":"4cdee1767768dfa4","type":"text","text":"Setup Wire + Claude Code","x":-430,"y":-60,"width":250,"height":60,"color":"4"},
+		{"id":"6b2423d4f85fd6a7","type":"text","text":"Create a vault","x":-430,"y":20,"width":250,"height":60,"color":"4"},
+		{"id":"559af4bf20d7ad3b","type":"text","text":"Add zakon and jcp-all repos","x":-430,"y":100,"width":250,"height":60,"color":"4"},
+		{"id":"6e6e0317cd1dc14e","type":"text","text":"Setup MCP for YouTrack","x":-430,"y":180,"width":250,"height":60,"color":"4"},
+		{"id":"6fda8438af95e210","x":-430,"y":260,"width":250,"height":60,"color":"1","type":"text","text":"Setup MCP for Slack"},
+		{"id":"e1502237792c3a7d","type":"text","text":"Create a new Claude skill","x":-430,"y":340,"width":250,"height":60,"color":"1"}
+	],
+	"edges":[]
+}

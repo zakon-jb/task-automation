@@ -1,0 +1,3 @@
+- [ ] Setup Obsidian #active 
+- [ ] Select education
+- [ ] Risk management for a marathon
