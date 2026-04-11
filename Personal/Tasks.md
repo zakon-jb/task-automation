@@ -1,3 +1,9 @@
+## Backlog
+
 - [ ] Setup Obsidian #active 
 - [ ] Select education
-- [ ] Risk management for a marathon
+- [ ] Fast linking issues to parent
+- [ ] Skill for Claude - clean up resolved tasks
+
+
+## Archive
