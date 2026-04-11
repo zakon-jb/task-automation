@@ -21,9 +21,11 @@ This skill finds and lists all active tasks from `/zakon/Task Management.md`.
 
 Return the result as a structured report.
 
-For every priority that has tasks:
+First print header 'Active Tasks'
 
-1. Print the priority line: `<Priority>`
+Then, for every priority that has tasks:
+
+1. Print the priority line: `<Priority>` with the corresponding icon, if exists
 3. Print a table with these columns:
    - `#`
    - `Project`
@@ -43,6 +45,7 @@ For every priority that has tasks:
 5. Extract and display project and status if present.
 6. Do not merge priorities into one table.
 7. Do not use dash bullets for tasks.
+8. Sort tasks within the same priority by status: In Progress first, Todo next
 
 ## Example layout
 
