@@ -5,11 +5,11 @@
 - [ ] Testing workflow
 - [ ] LLM Automation
 - [ ] LLM Pre-planning (product backlog)
-- [ ] Improve LLM Kanban board -- remove expired issues, support filtering #active 
-- [ ] Stop migration to Bedrock (discuss message with Andrey) #active
+- [ ] Improve LLM Kanban board -- remove expired issues, support filtering
+- [ ] Stop migration to Bedrock (discuss message with Andrey)
 - [ ] Add 'in progress' tasks to the kanban board
 - [ ] Minutes for yesterday's session
-- [ ] Air - switch to the new API v9 (chat and profile) #active 
+- [/] Air - switch to the new API v9 (chat and profile) #active 
 
 ## Archive
 

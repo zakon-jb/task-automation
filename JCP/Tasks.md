@@ -1,6 +1,6 @@
 ## Backlog
 
-- [ ] Agree on due dates for Junie tasks (web search) #active ⏫
+- [/] Agree on due dates for Junie tasks (web search) #active ⏫
 - [ ] (Artem/Mikhail) LV - what's the issue? To check with Artem/Mikhail 
 - [ ] (Mikhail) Finance issue #monitoring ⏫
 - [ ] Cross-project "JCP Milestone" field #active ⏫
@@ -27,18 +27,17 @@
 	- (Gleb) products without a license (e.g. Android Studio)
 	- (Gleb) merging customers after migration
 - [ ] (Gleb) New protocol of communication between AI tools <-> Pre-billing <-> BAD
-- [ ] Tech stream: How to test multi-region? to discuss with Kirill Falk (Vlad Chentsov) #active
+- [ ] Tech stream: How to test multi-region? to discuss with Kirill Falk (Vlad Chentsov)
 	- Add API Gateways to https://docs.google.com/spreadsheets/d/1Kur312UvSVoK5rzX1ZfsmFzyy5zQIAcFViD7_BfQTxI/edit?gid=0#gid=0
 	- https://youtrack-staging.labs.intellij.net/issue/JCP-2626/Multi-Region-testing
-- [ ] AIR task for switching to the new Tavily API #active
-- [ ] Issue tracking in Pre-billing (meet with Dima and Kirill) #active 
+- [/] AIR task for switching to the new Tavily API #active ⏫
+- [ ] Issue tracking in Pre-billing (meet with Dima and Kirill)
 - [ ] Migration of JB - plan #active ⏫
-- [ ] List of endpoints for LLM by Junie (and ability to switch to v9) #active ⏫
-- [ ] Skill for Code - find lost issues #active 
+- [/] List of endpoints for LLM by Junie (and ability to switch to v9) #active ⏫
 - [ ] Paid seats - in scope DP or not? #active ⏫ 
 - [ ] Dogfooding JB - team lead role? (Artem) #monitoring ⏫
 - [/] Dogfooding wire - how technically can it work with our staging? #active 🔺
-- [/] Можно ли заморозить AI-лицензии после миграции? (вопрос Куксу) #active 🔺
+- [/] Can we freeze AI licenses after migration? (question to Sergey Coox) #active 🔺
 - [/] Annual $200 or $240 ($20 x 12) #active 🔺
 - [ ] Meeting Technical migration next week #active ⏫
 
