@@ -19,3 +19,4 @@ Each subfolder represents a project or area of work. Inside each project folder:
 - Use Markdown for all files.
 - Folder names = project names (e.g., `JCP/`, `zakon/`).
 - No enforced file naming — use whatever makes sense per project.
+
