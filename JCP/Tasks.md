@@ -1,19 +1,7 @@
 ## Backlog
 
-- [/] Agree on due dates for Junie tasks (web search) #active ⏫
 - [ ] (Artem/Mikhail) LV - what's the issue? To check with Artem/Mikhail 
 - [ ] (Mikhail) Finance issue #monitoring ⏫
-- [ ] Cross-project "JCP Milestone" field #active ⏫
-	- https://youtrack-staging.labs.intellij.net/issue/JT-95117/I-need-to-reuse-an-enum-custom-field-across-different-YouTrack-projects
-- [ ] Scope for EAP Global #active
-	1. Paid seats, upgrade/downgrade (AI Gov + Pre-billing)
-	2. Auto-refill credit subscriptions (AI Gov + Pre-billing + BAD)
-	3. Postpaid (AI Gov + Pre-billing + BAD)
-	4. Trials (IDEs + Pre-billing + AI Gov?)
-	5. Orca consumption API (Orca + Pre-billing)
-	6. Ledger
-	7. Credit offers
-	8. Refunds?
 - [ ] (Gleb) Customer migration checklist (with Gleb)
 - [ ] (Gleb) Tech stream: Backstage for OpenAPI specs? Gleb will go to service owners (+ add to service readiness checklist) #monitoring
 - [ ] (Gleb) Two-phase migration (+ testing procedure) #monitoring
@@ -30,16 +18,13 @@
 - [ ] Tech stream: How to test multi-region? to discuss with Kirill Falk (Vlad Chentsov)
 	- Add API Gateways to https://docs.google.com/spreadsheets/d/1Kur312UvSVoK5rzX1ZfsmFzyy5zQIAcFViD7_BfQTxI/edit?gid=0#gid=0
 	- https://youtrack-staging.labs.intellij.net/issue/JCP-2626/Multi-Region-testing
-- [/] AIR task for switching to the new Tavily API #active ⏫
 - [ ] Issue tracking in Pre-billing (meet with Dima and Kirill)
 - [ ] Migration of JB - plan #active ⏫
 - [/] List of endpoints for LLM by Junie (and ability to switch to v9) #active ⏫
-- [ ] Paid seats - in scope DP or not? #active ⏫ 
 - [ ] Dogfooding JB - team lead role? (Artem) #monitoring ⏫
-- [/] Dogfooding wire - how technically can it work with our staging? #active 🔺
 - [/] Can we freeze AI licenses after migration? (question to Sergey Coox) #active 🔺
-- [/] Annual $200 or $240 ($20 x 12) #active 🔺
-- [ ] Meeting Technical migration next week #active ⏫
+- [ ] Add AI Business license to the web site - need ticket! #active ⏫
+- [/] Banner for AIP/AIPU licenses on the web site #active 🔺
 
 ## Archive
 
@@ -60,3 +45,22 @@
 - [x] Add meeting for Seats user story - Products (Artem, Viktor), Kirill, Maria Chuprasova, Chentsov? #active ✅ 2026-04-08
 - [x] Pre-release checklist https://jetbrains.slack.com/archives/C0AQYAFCS9X/p1775641899131319 #active ⏫ ✅ 2026-04-10
 - [x] Minutes e2e seats #active 🔺 ✅ 2026-04-11
+- [x] Agree on due dates for Junie tasks (web search) #active ⏫ ✅ 2026-04-13
+- [x] Cross-project "JCP Milestone" field #active ⏫ ✅ 2026-04-21
+	- https://youtrack-staging.labs.intellij.net/issue/JT-95117/I-need-to-reuse-an-enum-custom-field-across-different-YouTrack-projects
+- [x] Scope for EAP Global #active 🔺 ✅ 2026-04-21
+	1. Paid seats, upgrade/downgrade (AI Gov + Pre-billing)
+	2. Auto-refill credit subscriptions (AI Gov + Pre-billing + BAD)
+	3. Postpaid (AI Gov + Pre-billing + BAD)
+	4. Trials (IDEs + Pre-billing + AI Gov?)
+	5. Orca consumption API (Orca + Pre-billing)
+	6. Ledger
+	7. Credit offers
+	8. Refunds?
+- [x] AIR task for switching to the new Tavily API #active ⏫ ✅ 2026-04-21
+- [x] Paid seats - in scope DP or not? #active ⏫ ✅ 2026-04-16
+- [x] Dogfooding wire - how technically can it work with our staging? #active 🔺 ✅ 2026-04-16
+- [x] Annual $200 or $240 ($20 x 12) #active 🔺 ✅ 2026-04-16
+- [x] Meeting Technical migration next week #active ⏫ ✅ 2026-04-21
+- [x] Can Air team and Remote agents be enabled independently? #active 🔺 ✅ 2026-04-21
+- [x] Create task for BAD: Linked accounts: If there is a linked account, it should be primary assignee (BAD) #active ⏫ ✅ 2026-04-21
