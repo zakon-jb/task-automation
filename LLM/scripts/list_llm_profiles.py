@@ -32,7 +32,7 @@ YT_TOKEN_FILE = SCRIPT_DIR / "yt-token"
 
 DEPRECATION_URLS = {
     "OpenAI":    "https://developers.openai.com/api/docs/deprecations",
-    "Anthropic": "https://docs.anthropic.com/en/docs/about-claude/model-deprecations",
+    "Anthropic": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
     "Google":    "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
 }
 
@@ -300,7 +300,7 @@ def print_table(
         date = retirement.get(mid, "")
         # Mark dates that have no official source (present in yt_dates only)
         if date and mid not in scraped_dates:
-            date = date + " ⚠"
+            date = date + " !"
         rows.append((
             p.get("provider", ""),
             mid,
@@ -325,8 +325,8 @@ def print_table(
         print(f"| {provider:<{w1}} | {mid:<{w2}} | {jbai_id:<{w3}} | {ret:<{w4}} | {issue:<{w5}} |")
     print(sep)
     print(f"\n{len(rows)} profiles total.")
-    if any(" ⚠" in r[3] for r in rows):
-        print("⚠  = retirement date has no backing on the official provider deprecation page")
+    if any(" !" in r[3] for r in rows):
+        print("! = retirement date has no backing on the official provider deprecation page")
 
 
 # ── main ──────────────────────────────────────────────────────────────────────
