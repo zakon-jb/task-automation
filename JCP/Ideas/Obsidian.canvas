@@ -5,9 +5,9 @@
 		{"id":"6b2423d4f85fd6a7","type":"text","text":"Create a vault","x":-430,"y":20,"width":250,"height":60,"color":"4"},
 		{"id":"559af4bf20d7ad3b","type":"text","text":"Add zakon and jcp-all repos","x":-430,"y":100,"width":250,"height":60,"color":"4"},
 		{"id":"6e6e0317cd1dc14e","type":"text","text":"Setup MCP for YouTrack","x":-430,"y":180,"width":250,"height":60,"color":"4"},
-		{"id":"6fda8438af95e210","type":"text","text":"Setup MCP for Slack","x":-430,"y":260,"width":250,"height":60,"color":"1"},
-		{"id":"e1502237792c3a7d","type":"text","text":"Create a new Claude skill","x":-430,"y":340,"width":250,"height":60,"color":"1"},
-		{"id":"f89fcb63269a473f","x":-430,"y":420,"width":250,"height":60,"color":"1","type":"text","text":"Recurring tasks"}
+		{"id":"e1502237792c3a7d","type":"text","text":"Create a new Claude skill","x":-430,"y":260,"width":250,"height":60,"color":"4"},
+		{"id":"f89fcb63269a473f","type":"text","text":"Recurring tasks","x":-430,"y":340,"width":250,"height":60,"color":"1"},
+		{"id":"6fda8438af95e210","type":"text","text":"Setup MCP for Slack","x":-430,"y":420,"width":250,"height":60,"color":"1"}
 	],
 	"edges":[]
 }

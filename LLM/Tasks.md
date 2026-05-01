@@ -10,6 +10,7 @@
 - [ ] Add 'in progress' tasks to the kanban board
 - [ ] Minutes for yesterday's session
 - [ ] Air - switch to the new API v9 (chat and profile) #monitoring
+- [ ] LLM Retirement - automatic issues (via Claude Code + TeamCity trigger) #active 
 
 ## Archive
 

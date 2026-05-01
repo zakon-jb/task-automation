@@ -1,7 +1,6 @@
 ## Backlog
 
 - [ ] (Artem/Mikhail) LV - what's the issue? To check with Artem/Mikhail 
-- [ ] (Mikhail) Finance issue #monitoring ⏫
 - [ ] (Gleb) Customer migration checklist (with Gleb)
 - [ ] (Gleb) Tech stream: Backstage for OpenAPI specs? Gleb will go to service owners (+ add to service readiness checklist) #monitoring
 - [ ] (Gleb) Two-phase migration (+ testing procedure) #monitoring
@@ -19,12 +18,28 @@
 	- Add API Gateways to https://docs.google.com/spreadsheets/d/1Kur312UvSVoK5rzX1ZfsmFzyy5zQIAcFViD7_BfQTxI/edit?gid=0#gid=0
 	- https://youtrack-staging.labs.intellij.net/issue/JCP-2626/Multi-Region-testing
 - [ ] Issue tracking in Pre-billing (meet with Dima and Kirill)
-- [ ] Migration of JB - plan #active ⏫
-- [/] List of endpoints for LLM by Junie (and ability to switch to v9) #active ⏫
+- [ ] Migration of JB - plan
+- [ ] List of endpoints for LLM by Junie (and ability to switch to v9) https://youtrack.jetbrains.com/issue/MTRH-2679/Please-provide-a-list-of-AI-Platform-endpoints-used-by-Junie #monitoring
 - [ ] Dogfooding JB - team lead role? (Artem) #monitoring ⏫
-- [/] Can we freeze AI licenses after migration? (question to Sergey Coox) #active 🔺
-- [ ] Add AI Business license to the web site - need ticket! #active ⏫
-- [/] Banner for AIP/AIPU licenses on the web site #active 🔺
+- [ ] Can we freeze AI licenses after migration? (question to Sergey Coox) https://youtrack.jetbrains.com/issue/BAD-21711/Disable-AI-Pro-Ultimate-license #monitoring
+- [ ] Banner for AIP/AIPU licenses on the web site #active
+- [ ] Tech stream: Checklist for services -> hand over to On-Call: verify checklist (A.Sizov) #active 
+- [ ] Tech stream: Kick-off for front-end monitoring: setup process for front-end alerts (Sizov + Ksenia + Akif) #active 
+- [ ] Anti-fraud 2.0 estimates (Dmitry B) #active 
+- [ ] Pre-prod: fix from Dmitry Borin needed (mentioned by Maksim Manuylov) -> required for updating AuthZ #active 
+- [ ] Gleb: access to envs (staging / prod) #active 
+- [ ] Dmitry Borin: we need a multi-reg for Pre-prod (maybe not from the beginning)
+- [/] IDE features for JCP - versions (IDE, plugins) #active ⏫
+- [/] Minutes EAP scope #active
+- [ ] Retrospective Licensing and Billing team #active ⏫
+- [/] Dogfooding QA board #active ⏫
+- [ ] Licensing and Billing - new planning framework #active ⏫
+- [ ] Thirdparty libraries - reopen: separate Air Cloud (ask PMs), frontend for Air Cloud, BAD, trigger for daily updates #active 
+- [ ] Pre-prod working group + 1 hour meeting (Gleb + Kirill + A.Sizov + Pavel N.) #active 
+- [ ] Dogfooding bugfix process - connect with Alexander Ivlev #active 
+- [ ] Coordinate Wire #active 
+- [/] EAP Global Scope #active 🔺
+- [ ] What's wrong with issuing org service account tokens? #active 
 
 ## Archive
 
@@ -64,3 +79,9 @@
 - [x] Meeting Technical migration next week #active ⏫ ✅ 2026-04-21
 - [x] Can Air team and Remote agents be enabled independently? #active 🔺 ✅ 2026-04-21
 - [x] Create task for BAD: Linked accounts: If there is a linked account, it should be primary assignee (BAD) #active ⏫ ✅ 2026-04-21
+- [x] (Mikhail) Finance issue #monitoring ⏫ ✅ 2026-04-24
+- [x] Add AI Business license to the web site - need ticket! #active ⏫ ✅ 2026-04-24
+- [x] Air login #active ✅ 2026-04-24
+- [x] Task for Wire (Marcin): JCP login #active ✅ 2026-04-24
+- [x] Minutes recurrent payments #active ✅ 2026-04-25
+- [x] Read https://docs.google.com/document/d/1nkeqOMWptOPhILXFqN-H2tjfT4QhkDJPOl9GMOYcn6s/edit?tab=t.0 #active ✅ 2026-04-29
