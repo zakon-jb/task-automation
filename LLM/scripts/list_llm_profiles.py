@@ -101,24 +101,37 @@ def parse_date(raw: str) -> str:
 
 def _scrape_openai(text: str) -> dict[str, str]:
     """
-    Table structure after tag-stripping (one cell per line):
-      2026-10-23
-      gpt-3.5-turbo-0125   ← deprecated model
-      |                    ← cell separator
-      gpt-3.5-turbo        ← replacement (skip)
+    After tag-stripping, each token appears on its own line:
+      2026-10-23                    ← shutdown date
+      gpt-4-turbo                   ← display name
+       |                            ← within-cell separator (display name → version IDs)
+      gpt-4-turbo-2024-04-09        ← version ID (deprecated)
+      ,                             ← version separator
+      gpt-4-turbo-completions       ← another version ID (deprecated)
+      gpt-4.1                       ← replacement model (no separator before it)
+
+    The ' | ' and ', ' are separators within the deprecated-model cell, NOT
+    column separators. The replacement model has no explicit separator — it
+    just follows the last version ID. Replacement models are unversioned aliases
+    (e.g. "gpt-4.1") that don't appear in our versioned-ID profile set, so
+    capturing them is harmless. We therefore skip separator-only lines and
+    record every model-ID-shaped token for the current date.
     """
     result: dict[str, str] = {}
     current_date = None
     in_replacement = False
     date_re  = re.compile(r"^\s*(\d{4}-\d{2}-\d{2})\s*:?\s*$")
     model_re = re.compile(r"^\s*([a-z][a-z0-9.\-]{3,})\s*$")
+    sep_re   = re.compile(r"^\s*[|,]\s*$")  # standalone ' | ' or ', ' lines (within-cell separators)
     for line in text.splitlines():
         line = line.replace("‑", "-")  # non-breaking hyphen → regular
         if m := date_re.match(line):
             current_date = m.group(1)
             in_replacement = False
-        elif line.strip() == "|" or line.strip().startswith("$"):
-            in_replacement = True  # column separator: '|' in main table, price in embeddings table
+        elif line.strip().startswith("$"):
+            in_replacement = True  # embeddings table: price cell signals that replacement model follows
+        elif sep_re.match(line):
+            pass  # within-cell ' | ' or ', ' — skip, but do NOT set in_replacement
         elif current_date and not in_replacement and (m := model_re.match(line)):
             result.setdefault(m.group(1), current_date)
     return result
@@ -275,21 +288,26 @@ def fetch_profiles(app_token: str) -> list[dict]:
 # ── display ───────────────────────────────────────────────────────────────────
 
 def print_table(
-    profiles:   list[dict],
-    retirement: dict[str, str],
-    issues:     dict[str, str],
+    profiles:      list[dict],
+    retirement:    dict[str, str],
+    issues:        dict[str, str],
+    scraped_dates: dict[str, str],
 ) -> None:
     col1, col2, col3, col4, col5 = "Provider", "Provider Model ID", "JBAI ID", "Retirement Date", "YouTrack"
-    rows = [
-        (
+    rows = []
+    for p in profiles:
+        mid  = p.get("providerModelID", "")
+        date = retirement.get(mid, "")
+        # Mark dates that have no official source (present in yt_dates only)
+        if date and mid not in scraped_dates:
+            date = date + " ⚠"
+        rows.append((
             p.get("provider", ""),
-            p.get("providerModelID", ""),
+            mid,
             p.get("id", ""),
-            retirement.get(p.get("providerModelID", ""), ""),
-            issues.get(p.get("providerModelID", ""), ""),
-        )
-        for p in profiles
-    ]
+            date,
+            issues.get(mid, ""),
+        ))
     rows.sort(key=lambda r: (r[3] == "", r[3], r[0], r[1]))
 
     w1 = max(len(col1), max((len(r[0]) for r in rows), default=0))
@@ -307,6 +325,8 @@ def print_table(
         print(f"| {provider:<{w1}} | {mid:<{w2}} | {jbai_id:<{w3}} | {ret:<{w4}} | {issue:<{w5}} |")
     print(sep)
     print(f"\n{len(rows)} profiles total.")
+    if any(" ⚠" in r[3] for r in rows):
+        print("⚠  = retirement date has no backing on the official provider deprecation page")
 
 
 # ── main ──────────────────────────────────────────────────────────────────────
@@ -327,7 +347,7 @@ def main() -> None:
     retirement          = {**scraped_dates}
     retirement.update(yt_dates)  # YouTrack retirement dates take precedence over scraped dates
 
-    print_table(profiles, retirement, yt_issues)
+    print_table(profiles, retirement, yt_issues, scraped_dates)
 
     # Machine-readable metadata for skill analysis (not intended for human reading)
     metadata = {
