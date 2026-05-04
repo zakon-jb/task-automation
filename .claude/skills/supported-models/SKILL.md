@@ -41,15 +41,49 @@ Build a lookup: `{ provider_model_id → { issue_id, yt_provider, yt_retirement_
 
 ### Step 3 — Print Insights
 
+First, compute results for all four insights. Then print a **Status Summary** table, followed by the detail sections.
+
+#### Status Summary
+
+Print this table immediately after the profiles table:
+
+```
+## Status Summary
+| # | Check                                    | Status        |
+|---|------------------------------------------|---------------|
+| 1 | Missing YouTrack issues                  | ✓ clean       |
+| 2 | YT issues without retirement date        | ⚠ N found    |
+| 3 | YT issues covering multiple models       | ⚠ N found    |
+| 4 | Data discrepancies                       | ✓ clean       |
+```
+
+- Use `✓ clean` when the check finds nothing.
+- Use `⚠ N found` (with the actual count) when the check finds issues.
+
 #### Insight 1 — Missing YouTrack issues
+
+Header format:
+- Clean: `## Insight 1 — Missing YouTrack issues  ✓`  followed by `None.`
+- Issues: `## Insight 1 — Missing YouTrack issues  ⚠ N found`  followed by the list
+
 List every model that has a non-empty Retirement Date in the table but an empty YouTrack column.
 Format: `<provider-model-id>  →  <retirement-date>`
 
 #### Insight 2 — YouTrack issues without a matching retirement date
+
+Header format:
+- Clean: `## Insight 2 — YouTrack issues without a matching retirement date  ✓`  followed by `None.`
+- Issues: `## Insight 2 — YouTrack issues without a matching retirement date  ⚠ N found`  followed by the list
+
 List every YouTrack URL that appears in the table but none of the models it covers has a Retirement Date.
 Format: `<url>  (models: <model-id>, ...)`
 
 #### Insight 3 — YouTrack issues covering more than one model
+
+Header format:
+- Clean: `## Insight 3 — YouTrack issues covering more than one model  ✓`  followed by `None.`
+- Issues: `## Insight 3 — YouTrack issues covering more than one model  ⚠ N found`  followed by the list
+
 List every YouTrack URL that appears in more than one row.
 Format:
 ```
@@ -59,7 +93,12 @@ Format:
 ```
 
 #### Insight 4 — Discrepancies between official data and YouTrack
-**Important:** Print this section with a prominent `⚠ DISCREPANCIES FOUND` header if any issues are found in any sub-category. Use bold or ALL-CAPS labels on each flagged item so they stand out. If the section is clean, print `No discrepancies found.` in plain text.
+
+Header format:
+- Clean: `## Insight 4 — Discrepancies between official data and YouTrack  ✓`  followed by `No discrepancies found.`
+- Issues: `## Insight 4 — Discrepancies between official data and YouTrack  ⚠ DISCREPANCIES FOUND`  followed by the sub-sections
+
+Use bold or ALL-CAPS labels on each flagged item so they stand out.
 
 For every model that has a matched YouTrack issue, check each of the following.
 Report any mismatches:
@@ -83,5 +122,3 @@ Check two cases for every model that has a matched YouTrack issue:
 **c) Orphaned YouTrack issues**
 List any YT issues (from the MCP result) whose "Provider Model ID" custom field does not match any model in the profiles table.
 Format: `<issue-id>  (Provider Model ID: "<value>")`
-
-If no issues are found in any category, print: `No discrepancies found.`

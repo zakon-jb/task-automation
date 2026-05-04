@@ -1,16 +1,16 @@
 ## Backlog
 
-- [ ] (zakon) BYOK risks -- https://youtrack.jetbrains.com/agiles/153-7321/current?tab=chart&settings&chart #monitoring
+- [x] (zakon) BYOK risks -- https://youtrack.jetbrains.com/agiles/153-7321/current?tab=chart&settings&chart #monitoring ✅ 2026-05-04
 - [ ] Finalize business process - keep only important stuff
 - [ ] Testing workflow
 - [ ] LLM Automation
 - [ ] LLM Pre-planning (product backlog)
-- [ ] Improve LLM Kanban board -- remove expired issues, support filtering
+- [x] Improve LLM Kanban board -- remove expired issues, support filtering ✅ 2026-05-04
 - [ ] Stop migration to Bedrock (discuss message with Andrey)
-- [ ] Add 'in progress' tasks to the kanban board
-- [ ] Minutes for yesterday's session
-- [ ] Air - switch to the new API v9 (chat and profile) #monitoring
-- [ ] LLM Retirement - automatic issues (via Claude Code + TeamCity trigger) #active 
+- [x] Add 'in progress' tasks to the kanban board ✅ 2026-05-04
+- [x] Minutes for yesterday's session ✅ 2026-05-04
+- [x] Air - switch to the new API v9 (chat and profile) #monitoring ✅ 2026-05-04
+- [x] LLM Retirement - automatic issues (via Claude Code + TeamCity trigger) #active ✅ 2026-05-04
 
 ## Archive
 

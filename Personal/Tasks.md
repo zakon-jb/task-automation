@@ -1,8 +1,8 @@
 ## Backlog
 
 - [ ] Select education
-- [ ] Fast linking issues to parent
-- [ ] Skill for Claude - clean up resolved tasks
+- [x] Fast linking issues to parent ✅ 2026-05-04
+- [x] Skill for Claude - clean up resolved tasks ✅ 2026-05-04
 
 ## Archive
 
