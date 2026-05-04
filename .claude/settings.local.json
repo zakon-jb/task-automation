@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__YouTrack__search_issues",
+      "mcp__YouTrack__get_issue",
+      "mcp__YouTrack__get_issue_fields_schema",
+      "mcp__YouTrack__create_issue",
+      "WebFetch(domain:platform.jetbrains.ai)",
+      "Bash(python3 *)",
+      "WebFetch(domain:platform.openai.com)",
+      "WebFetch(domain:docs.anthropic.com)",
+      "WebFetch(domain:developers.openai.com)",
+      "WebFetch(domain:docs.cloud.google.com)"
+    ]
+  }
+}
