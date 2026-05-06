@@ -9,7 +9,7 @@ All data is gathered dynamically at runtime:
   - YouTrack issues:   JBAIP project, type: LLM Retirement (REST API, custom fields)
 
 Arguments:
-  --app-token  JetBrains AI Platform JWT (required)
+  --grazie-app-token  JetBrains AI Platform JWT (required)
   --yt-token   YouTrack permanent token (Profile → Account Security → Tokens)
 """
 
@@ -262,11 +262,11 @@ def fetch_youtrack_issues(yt_token: str) -> Tuple[dict[str, str], dict[str, str]
 
 # ── profiles ──────────────────────────────────────────────────────────────────
 
-def fetch_profiles(app_token: str) -> list[dict]:
+def fetch_profiles(grazie_app_token: str) -> list[dict]:
     headers = {
         "Content-Type":            "application/json",
         "Grazie-Agent":            '{"name":"llm-list-scanner","version":"dev"}',
-        "Grazie-Authenticate-JWT": app_token,
+        "Grazie-Authenticate-JWT": grazie_app_token,
     }
     return fetch_json(PROFILES_URL, headers).get("profiles", [])
 
@@ -319,21 +319,21 @@ def print_table(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="List LLM profiles from JetBrains AI Platform.")
-    parser.add_argument("--app-token", required=True, help="JetBrains AI Platform JWT")
+    parser.add_argument("--grazie-app-token", required=True, help="JetBrains AI Platform JWT")
     parser.add_argument("--yt-token", default="", help="YouTrack permanent token")
     args = parser.parse_args()
 
-    app_token = args.app_token.strip()
+    grazie_app_token = args.grazie_app_token.strip()
     yt_token  = args.yt_token.strip()
 
-    if not app_token:
-        print("Error: --app-token must not be empty", file=sys.stderr)
+    if not grazie_app_token:
+        print("Error: --grazie-app-token must not be empty", file=sys.stderr)
         sys.exit(1)
     if not yt_token:
         print("Warning: --yt-token not provided — skipping YouTrack data.", file=sys.stderr)
 
     try:
-        profiles = fetch_profiles(app_token)
+        profiles = fetch_profiles(grazie_app_token)
     except Exception as exc:
         print(f"Error fetching profiles: {exc}", file=sys.stderr)
         sys.exit(1)

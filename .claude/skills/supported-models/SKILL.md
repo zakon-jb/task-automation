@@ -13,7 +13,7 @@ Run the script `LLM/scripts/list_llm_profiles.py`, display its output, analyse i
 
 Run:
 ```
-python3 /Users/konstantin.zaporozhtsev/GitRepos/zakon/LLM/scripts/list_llm_profiles.py --app-token "$GRAZIE_TOKEN" --yt-token "$YT_TOKEN"
+python3 /Users/konstantin.zaporozhtsev/GitRepos/zakon/LLM/scripts/list_llm_profiles.py --grazie-app-token "$GRAZIE_APP_TOKEN" --yt-token "$YT_TOKEN"
 ```
 
 The output contains:
