@@ -8,13 +8,13 @@ All data is gathered dynamically at runtime:
   - Retirement dates:  scraped from provider deprecation pages
   - YouTrack issues:   JBAIP project, type: LLM Retirement (REST API, custom fields)
 
-Environment variables:
-  GRAZIE_TOKEN  — JetBrains AI Platform JWT (required)
-  YT_TOKEN      — YouTrack permanent token (Profile → Account Security → Tokens)
+Arguments:
+  --app-token  JetBrains AI Platform JWT (required)
+  --yt-token   YouTrack permanent token (Profile → Account Security → Tokens)
 """
 
+import argparse
 import json
-import os
 import re
 import sys
 import urllib.parse
@@ -34,17 +34,6 @@ DEPRECATION_URLS = {
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
-
-def load_env_token(var: str, required: bool = True) -> Optional[str]:
-    value = os.environ.get(var, "").strip()
-    if not value:
-        if required:
-            print(f"Error: environment variable ${var} is not set", file=sys.stderr)
-            sys.exit(1)
-        print(f"Warning: ${var} is not set — skipping that data source.", file=sys.stderr)
-        return None
-    return value
-
 
 def http_get(url: str, headers: Optional[dict] = None) -> bytes:
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", **(headers or {})})
@@ -329,8 +318,19 @@ def print_table(
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    app_token = load_env_token("GRAZIE_TOKEN", required=True)
-    yt_token  = load_env_token("YT_TOKEN", required=False)
+    parser = argparse.ArgumentParser(description="List LLM profiles from JetBrains AI Platform.")
+    parser.add_argument("--app-token", required=True, help="JetBrains AI Platform JWT")
+    parser.add_argument("--yt-token", default="", help="YouTrack permanent token")
+    args = parser.parse_args()
+
+    app_token = args.app_token.strip()
+    yt_token  = args.yt_token.strip()
+
+    if not app_token:
+        print("Error: --app-token must not be empty", file=sys.stderr)
+        sys.exit(1)
+    if not yt_token:
+        print("Warning: --yt-token not provided — skipping YouTrack data.", file=sys.stderr)
 
     try:
         profiles = fetch_profiles(app_token)
