@@ -8,27 +8,23 @@ All data is gathered dynamically at runtime:
   - Retirement dates:  scraped from provider deprecation pages
   - YouTrack issues:   JBAIP project, type: LLM Retirement (REST API, custom fields)
 
-Token files (same directory as this script):
-  app-token  — JetBrains AI Platform JWT
-  yt-token   — YouTrack permanent token (Profile → Account Security → Tokens)
+Environment variables:
+  GRAZIE_TOKEN  — JetBrains AI Platform JWT (required)
+  YT_TOKEN      — YouTrack permanent token (Profile → Account Security → Tokens)
 """
 
 import json
+import os
 import re
 import sys
 import urllib.parse
 import urllib.request
 from datetime import datetime
 from html.parser import HTMLParser
-from pathlib import Path
 from typing import Optional, Tuple
 
 PROFILES_URL = "https://api.jetbrains.ai/application/v5/llm/profiles/v8"
 YOUTRACK_API = "https://youtrack.jetbrains.com/api/issues"
-
-SCRIPT_DIR    = Path(__file__).parent
-TOKEN_FILE    = SCRIPT_DIR / "app-token"
-YT_TOKEN_FILE = SCRIPT_DIR / "yt-token"
 
 DEPRECATION_URLS = {
     "OpenAI":    "https://developers.openai.com/api/docs/deprecations",
@@ -39,14 +35,15 @@ DEPRECATION_URLS = {
 
 # ── helpers ───────────────────────────────────────────────────────────────────
 
-def load_token(path: Path, required: bool = True) -> Optional[str]:
-    if not path.exists():
+def load_env_token(var: str, required: bool = True) -> Optional[str]:
+    value = os.environ.get(var, "").strip()
+    if not value:
         if required:
-            print(f"Error: token file not found: {path}", file=sys.stderr)
+            print(f"Error: environment variable ${var} is not set", file=sys.stderr)
             sys.exit(1)
-        print(f"Warning: {path.name} not found — skipping that data source.", file=sys.stderr)
+        print(f"Warning: ${var} is not set — skipping that data source.", file=sys.stderr)
         return None
-    return path.read_text().strip()
+    return value
 
 
 def http_get(url: str, headers: Optional[dict] = None) -> bytes:
@@ -332,8 +329,8 @@ def print_table(
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    app_token = load_token(TOKEN_FILE, required=True)
-    yt_token  = load_token(YT_TOKEN_FILE, required=False)
+    app_token = load_env_token("GRAZIE_TOKEN", required=True)
+    yt_token  = load_env_token("YT_TOKEN", required=False)
 
     try:
         profiles = fetch_profiles(app_token)
