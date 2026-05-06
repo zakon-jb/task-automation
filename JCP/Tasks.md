@@ -1,47 +1,31 @@
 ## Backlog
 
-- [x] (Artem/Mikhail) LV - what's the issue? To check with Artem/Mikhail ✅ 2026-05-04
 - [ ] (Gleb) Customer migration checklist (with Gleb)
 - [ ] (Gleb) Tech stream: Backstage for OpenAPI specs? Gleb will go to service owners (+ add to service readiness checklist) #monitoring
-- [x] (Gleb) Two-phase migration (+ testing procedure) #monitoring ✅ 2026-05-04
-	- Sergey Zhuravlev will discuss with Gleb
 - [ ] (Pavel Nikitin) Tech: Thirdparty libs #monitoring
-- [x] (Maria) Duplicated channels for Seats and Billing ✅ 2026-05-04
-- [x] (Olga + Dima) Orca Consumption API - after April 10 ✅ 2026-05-04
-- [x] Communication to 'lost' users - how/when/who? ✅ 2026-05-04
-- [ ] JCP - BAD corner cases for EAP Global
-	- (Gleb) changing customer type: personal → organization
-	- (Gleb) products without a license (e.g. Android Studio)
-	- (Gleb) merging customers after migration
 - [ ] (Gleb) New protocol of communication between AI tools <-> Pre-billing <-> BAD #active
 - [ ] Tech stream: How to test multi-region? to discuss with Kirill Falk (Vlad Chentsov)
 	- Add API Gateways to https://docs.google.com/spreadsheets/d/1Kur312UvSVoK5rzX1ZfsmFzyy5zQIAcFViD7_BfQTxI/edit?gid=0#gid=0
 	- https://youtrack-staging.labs.intellij.net/issue/JCP-2626/Multi-Region-testing
-- [x] Issue tracking in Pre-billing (meet with Dima and Kirill) ✅ 2026-05-04
-- [x] Migration of JB - plan ✅ 2026-05-04
 - [ ] List of endpoints for LLM by Junie (and ability to switch to v9) https://youtrack.jetbrains.com/issue/MTRH-2679/Please-provide-a-list-of-AI-Platform-endpoints-used-by-Junie #monitoring
 - [ ] Dogfooding JB - team lead role? (Artem) #monitoring ⏫
 - [ ] Can we freeze AI licenses after migration? (question to Sergey Coox) https://youtrack.jetbrains.com/issue/BAD-21711/Disable-AI-Pro-Ultimate-license #monitoring
 - [ ] Banner for AIP/AIPU licenses on the web site #monitoring
 - [ ] Tech stream: Checklist for services -> hand over to On-Call: verify checklist (A.Sizov) #active 
 - [ ] Tech stream: Kick-off for front-end monitoring: setup process for front-end alerts (Sizov + Ksenia + Akif) #active 
-- [x] Anti-fraud 2.0 estimates (Dmitry B) #active ✅ 2026-05-04
 - [ ] Pre-prod: fix from Dmitry Borin needed (mentioned by Maksim Manuylov) -> required for updating AuthZ #active 
 - [ ] Gleb: access to envs (staging / prod) #monitoring
 - [ ] Dmitry Borin: we need a multi-reg for Pre-prod (maybe not from the beginning)
-- [x] IDE features for JCP - versions (IDE, plugins) #active ⏫ ✅ 2026-05-04
-- [x] Minutes EAP scope #active ✅ 2026-05-04
 - [ ] Retrospective Licensing and Billing team #active ⏫
-- [/] Dogfooding QA board #active ⏫
 - [ ] Licensing and Billing - new planning framework #active ⏫
 - [ ] Thirdparty libraries - reopen: separate Air Cloud (ask PMs), frontend for Air Cloud, BAD, trigger for daily updates #monitoring
-- [x] Pre-prod working group + 1 hour meeting (Gleb + Kirill + A.Sizov + Pavel N.) #active ✅ 2026-05-04
-- [ ] Dogfooding bugfix process - connect with Alexander Ivlev #active ⏫
-- [ ] Coordinate Wire #active ⏫
+- [/] Dogfooding bugfix process - connect with Alexander Ivlev #active ⏫
+- [/] Coordinate Wire #active ⏫
 - [/] EAP Global Scope #active 🔺
-- [ ] What's wrong with issuing org service account tokens? #active 
-- [ ] Anti-fraud plans and scope for pre-billing #active 
-- [ ] Pre-billing tasks clean-up https://youtrack.jetbrains.com/issue/JCP-1289/PAYG-AI-Seats-and-Billing-for-EAP-Design-Partners #active 
+- [ ] Anti-fraud plans and scope for pre-billing #monitoring
+- [/] Pre-billing tasks clean-up https://youtrack.jetbrains.com/issue/JCP-1289/PAYG-AI-Seats-and-Billing-for-EAP-Design-Partners #active
+- [/] Minutes recurrent top-ups #active ⏫
+- [ ] JCP-BAD corner case: changing customer type: personal → organization #active 
 
 ## Archive
 
@@ -87,3 +71,17 @@
 - [x] Task for Wire (Marcin): JCP login #active ✅ 2026-04-24
 - [x] Minutes recurrent payments #active ✅ 2026-04-25
 - [x] Read https://docs.google.com/document/d/1nkeqOMWptOPhILXFqN-H2tjfT4QhkDJPOl9GMOYcn6s/edit?tab=t.0 #active ✅ 2026-04-29
+- [x] (Artem/Mikhail) LV - what's the issue? To check with Artem/Mikhail ✅ 2026-05-04
+- [x] (Gleb) Two-phase migration (+ testing procedure) #monitoring ✅ 2026-05-04
+	- Sergey Zhuravlev will discuss with Gleb
+- [x] (Maria) Duplicated channels for Seats and Billing ✅ 2026-05-04
+- [x] (Olga + Dima) Orca Consumption API - after April 10 ✅ 2026-05-04
+- [x] Communication to 'lost' users - how/when/who? ✅ 2026-05-04
+- [x] Issue tracking in Pre-billing (meet with Dima and Kirill) ✅ 2026-05-04
+- [x] Migration of JB - plan ✅ 2026-05-04
+- [x] Anti-fraud 2.0 estimates (Dmitry B) #active ✅ 2026-05-04
+- [x] IDE features for JCP - versions (IDE, plugins) #active ⏫ ✅ 2026-05-04
+- [x] Minutes EAP scope #active ✅ 2026-05-04
+- [x] Dogfooding QA board #active ⏫ ✅ 2026-05-05
+- [x] Pre-prod working group + 1 hour meeting (Gleb + Kirill + A.Sizov + Pavel N.) #active ✅ 2026-05-04
+- [x] What's wrong with issuing org service account tokens? #active ✅ 2026-05-05
