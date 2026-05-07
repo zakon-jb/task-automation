@@ -1,10 +1,9 @@
 ## Backlog
 
 - [ ] Finalize business process - keep only important stuff
-- [ ] Testing workflow
+- [ ] Testing workflow #active 
 - [ ] LLM Automation
 - [ ] LLM Pre-planning (product backlog)
-- [x] Stop migration to Bedrock (discuss message with Andrey) ✅ 2026-05-05
 
 ## Archive
 
@@ -19,3 +18,4 @@
 - [x] Minutes for yesterday's session ✅ 2026-05-04
 - [x] Air - switch to the new API v9 (chat and profile) #monitoring ✅ 2026-05-04
 - [x] LLM Retirement - automatic issues (via Claude Code + TeamCity trigger) #active ✅ 2026-05-04
+- [x] Stop migration to Bedrock (discuss message with Andrey) ✅ 2026-05-05

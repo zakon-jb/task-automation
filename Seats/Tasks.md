@@ -1,31 +1,23 @@
 ## Backlog
 
 - [ ] (Gleb) Customer migration checklist (with Gleb)
-- [ ] (Gleb) Tech stream: Backstage for OpenAPI specs? Gleb will go to service owners (+ add to service readiness checklist) #monitoring
-- [ ] (Pavel Nikitin) Tech: Thirdparty libs #monitoring
-- [ ] (Gleb) New protocol of communication between AI tools <-> Pre-billing <-> BAD #active
-- [ ] Tech stream: How to test multi-region? to discuss with Kirill Falk (Vlad Chentsov)
-	- Add API Gateways to https://docs.google.com/spreadsheets/d/1Kur312UvSVoK5rzX1ZfsmFzyy5zQIAcFViD7_BfQTxI/edit?gid=0#gid=0
-	- https://youtrack-staging.labs.intellij.net/issue/JCP-2626/Multi-Region-testing
+- [ ] New protocol of communication between AI tools <-> Pre-billing <-> BAD #active
 - [ ] List of endpoints for LLM by Junie (and ability to switch to v9) https://youtrack.jetbrains.com/issue/MTRH-2679/Please-provide-a-list-of-AI-Platform-endpoints-used-by-Junie #monitoring
 - [ ] Dogfooding JB - team lead role? (Artem) #monitoring ⏫
 - [ ] Can we freeze AI licenses after migration? (question to Sergey Coox) https://youtrack.jetbrains.com/issue/BAD-21711/Disable-AI-Pro-Ultimate-license #monitoring
 - [ ] Banner for AIP/AIPU licenses on the web site #monitoring
-- [ ] Tech stream: Checklist for services -> hand over to On-Call: verify checklist (A.Sizov) #active 
-- [ ] Tech stream: Kick-off for front-end monitoring: setup process for front-end alerts (Sizov + Ksenia + Akif) #active 
-- [ ] Pre-prod: fix from Dmitry Borin needed (mentioned by Maksim Manuylov) -> required for updating AuthZ #active 
-- [ ] Gleb: access to envs (staging / prod) #monitoring
-- [ ] Dmitry Borin: we need a multi-reg for Pre-prod (maybe not from the beginning)
 - [ ] Retrospective Licensing and Billing team #active ⏫
-- [ ] Licensing and Billing - new planning framework #active ⏫
-- [ ] Thirdparty libraries - reopen: separate Air Cloud (ask PMs), frontend for Air Cloud, BAD, trigger for daily updates #monitoring
-- [/] Dogfooding bugfix process - connect with Alexander Ivlev #active ⏫
-- [/] Coordinate Wire #active ⏫
+- [/] Licensing and Billing - new planning framework #active ⏫
+- [/] Dogfooding bug tracking process #active ⏫
+- [/] Coordinate Wire #active 🔺
 - [/] EAP Global Scope #active 🔺
 - [ ] Anti-fraud plans and scope for pre-billing #monitoring
 - [/] Pre-billing tasks clean-up https://youtrack.jetbrains.com/issue/JCP-1289/PAYG-AI-Seats-and-Billing-for-EAP-Design-Partners #active
-- [/] Minutes recurrent top-ups #active ⏫
 - [ ] JCP-BAD corner case: changing customer type: personal → organization #active 
+- [ ] Linked accounts - find affected companies #active
+- [ ] Wire legal issue on Viktor #monitoring ⏫
+- [/] BYOK Blockers (https://youtrack.jetbrains.com/issue/JBAIP-993/AWS-Bedrock-Add-models-to-work-as-a-template-for-AIM, https://youtrack.jetbrains.com/issue/JBAIP-989/New-endpoint-to-get-models-for-management-needs) #active ⏫
+- [/] AIA minutes #active 🔺
 
 ## Archive
 
@@ -85,3 +77,4 @@
 - [x] Dogfooding QA board #active ⏫ ✅ 2026-05-05
 - [x] Pre-prod working group + 1 hour meeting (Gleb + Kirill + A.Sizov + Pavel N.) #active ✅ 2026-05-04
 - [x] What's wrong with issuing org service account tokens? #active ✅ 2026-05-05
+- [x] Minutes recurrent top-ups #active ⏫ ✅ 2026-05-07

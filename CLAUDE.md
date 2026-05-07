@@ -10,13 +10,13 @@ This repository is a personal knowledge base and task manager. It is not a code 
 
 Each subfolder represents a project or area of work. Inside each project folder:
 
-- **Tasks** — to-do items and action items (e.g., `My Tasks.md`)
+- **Tasks** — to-do items and action items (e.g., `Tasks.md`)
 - **Meeting notes** — notes from meetings, syncs, or calls
 - **Ideas** — brainstorming, proposals, rough thoughts
 
 ## Conventions
 
 - Use Markdown for all files.
-- Folder names = project names (e.g., `JCP/`, `zakon/`).
+- Folder names = project names (e.g., `Seats/`, `LLM/`).
 - No enforced file naming — use whatever makes sense per project.
 
