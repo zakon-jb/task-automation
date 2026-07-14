@@ -1,1 +1,1 @@
-This is my workspace 
+A personal knowledge base and task manager, organized as Markdown files. Each top-level folder is a project or area of work, holding its own tasks, meeting notes, and ideas. Not a code project — just my workspace.
