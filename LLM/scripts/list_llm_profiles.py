@@ -29,7 +29,7 @@ YOUTRACK_API = "https://youtrack.jetbrains.com/api/issues"
 DEPRECATION_URLS = {
     "OpenAI":    "https://developers.openai.com/api/docs/deprecations",
     "Anthropic": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
-    "Google":    "https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions",
+    "Google":    "https://ai.google.dev/gemini-api/docs/deprecations",
 }
 
 
