@@ -10,7 +10,10 @@
       "WebFetch(domain:platform.openai.com)",
       "WebFetch(domain:docs.anthropic.com)",
       "WebFetch(domain:developers.openai.com)",
-      "WebFetch(domain:docs.cloud.google.com)"
+      "WebFetch(domain:docs.cloud.google.com)",
+      "WebFetch(domain:ai.google.dev)",
+      "Bash(curl -s -A \"Mozilla/5.0\" \"https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions\" -o /tmp/vertex.html)",
+      "Read(//tmp/**)"
     ]
   }
 }
