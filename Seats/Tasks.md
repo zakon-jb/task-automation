@@ -1,26 +1,62 @@
 ## Backlog
 
-- [ ] (Gleb) Customer migration checklist (with Gleb)
-- [ ] New protocol of communication between AI tools <-> Pre-billing <-> BAD #active
-- [ ] List of endpoints for LLM by Junie (and ability to switch to v9) https://youtrack.jetbrains.com/issue/MTRH-2679/Please-provide-a-list-of-AI-Platform-endpoints-used-by-Junie #monitoring
-- [ ] Dogfooding JB - team lead role? (Artem) #monitoring ⏫
-- [ ] Can we freeze AI licenses after migration? (question to Sergey Coox) https://youtrack.jetbrains.com/issue/BAD-21711/Disable-AI-Pro-Ultimate-license #monitoring
-- [ ] Banner for AIP/AIPU licenses on the web site #monitoring
-- [ ] Retrospective Licensing and Billing team #active ⏫
-- [/] Licensing and Billing - new planning framework #active ⏫
-- [/] Dogfooding bug tracking process #active ⏫
-- [/] Coordinate Wire #active 🔺
-- [/] EAP Global Scope #active 🔺
-- [ ] Anti-fraud plans and scope for pre-billing #monitoring
-- [/] Pre-billing tasks clean-up https://youtrack.jetbrains.com/issue/JCP-1289/PAYG-AI-Seats-and-Billing-for-EAP-Design-Partners #active
-- [ ] JCP-BAD corner case: changing customer type: personal → organization #active 
-- [ ] Linked accounts - find affected companies #active
-- [ ] Wire legal issue on Viktor #monitoring ⏫
-- [/] BYOK Blockers (https://youtrack.jetbrains.com/issue/JBAIP-993/AWS-Bedrock-Add-models-to-work-as-a-template-for-AIM, https://youtrack.jetbrains.com/issue/JBAIP-989/New-endpoint-to-get-models-for-management-needs) #active ⏫
-- [/] AIA minutes #active 🔺
+- [ ] Licensing and Billing - new planning framework ⏫
+- [ ] Triage new issues in L&B #active
+- [x] Check pre-billing feature flags #active ⏫ ✅ 2026-07-08
+- [ ] DataSpell
+- [ ] Refund - how it works with Allowances?
+- [ ] Revenue recognition service - developer? M. Naumenko?
+- [ ] Bug with upgrade on the day of migration - check priority with Blagutin #active 
+- [x] Test org in prod - https://youtrack.jetbrains.com/issue/JCP-5323/Test-Org-in-Prod #active ⏫ ✅ 2026-07-08
+- [/] Junie feature flag - to enable after June 13 #active ⏫
+- [ ] BAD - disable ai access management after migration? #active 
+- [x] Magioli - credit amount? #active 🔺 ✅ 2026-07-10
+- [/] Q3 - sizing?? #active ⏫
+- [ ] Sprint planning pre-billing #active ⏫
+- [x] Credit amount reports to customers #active 🔺 ✅ 2026-07-13
+- [/] AIA --> Full Seats Support? #active ⏫
 
 ## Archive
 
+- [x] IDE active trials -> change amount after migration - bug? #active ⏫ ✅ 2026-07-07
+- [x] (Gleb) Customer migration checklist (with Gleb) ✅ 2026-06-30
+- [x] List of endpoints for LLM by Junie (and ability to switch to v9) https://youtrack.jetbrains.com/issue/MTRH-2679/Please-provide-a-list-of-AI-Platform-endpoints-used-by-Junie #monitoring ✅ 2026-07-07
+- [x] Balance after migration - Borlyk + Sergey Zh #active ⏫ ✅ 2026-06-30
+- [x] Analytics for account balances - remove from EAP? #active 🔺 ✅ 2026-07-01
+- [x] Sanity tests for Seats in IDE - AIA/R# #active ⏫ ✅ 2026-07-06
+- [x] Testing resource from BAD #active 🔺 ✅ 2026-06-30
+- [x] IJ RC (or EAP) on July 7 - add this to the message to customers! #active 🔺 ✅ 2026-07-06
+- [x] Changes on the BAD side? #active 🔺 ✅ 2026-07-06
+- [x] Trials - postpone? #active 🔺 ✅ 2026-07-06
+- [x] Air readiness #active 🔺 ✅ 2026-07-07
+- [x] Paid seats - ToS (MB) #monitoring ⏫ ✅ 2026-06-23
+- [x] Task for BAD - add aiAccessEnabled flag to checkLicense, webhook, etc #active 🔺 ✅ 2026-06-23
+- [x] Product managers should decide on ai access for multiple licenses case (one with ai access, another - w/o) #active 🔺 ✅ 2026-06-23
+- [x] API in BAD for % switch #active 🔺 ✅ 2026-06-23
+- [x] Remove Tester field for L&B #active ✅ 2026-06-25
+- [x] Due Dates for AI clients https://docs.google.com/document/d/1jfvdVqmMdtuL0uwbWpICZxgXs1tI0FogePRiZ6DHzN0/edit?tab=t.pk9080xr5hge #active ⏫ ✅ 2026-06-25
+- [x] List for trials - Vlad Tankov #active ✅ 2026-06-29
+- [x] Inform A.Semenkin #active ✅ 2026-06-24
+- [x] AIP allowance - task #active ⏫ ✅ 2026-06-25
+- [x] No QA!!! #active 🔺 ✅ 2026-06-26
+- [x] Analytics - write business scenarios #active ⏫ ✅ 2026-06-29
+- [x] QA tasks priority #active 🔺 ✅ 2026-06-30
+- [x] EAP Global Scope #active 🔺 ✅ 2026-06-08
+- [x] Revenue recognition https://miro.com/app/board/uXjVHVEP4KQ=/ #active ✅ 2026-06-04
+- [x] LV AI Access #active ✅ 2026-06-04
+- [x] Is there everything in the Ledger? #active ✅ 2026-06-04
+- [x] Contact AIA for due dates for aiSeatsEnabled https://youtrack.jetbrains.com/issue/JCP-4311/aiSeatsEnabled-claim-in-AIP-token #active 🔺 ✅ 2026-06-08
+- [x] Corporate trials channel #active 🔺 ✅ 2026-06-08
+- [x] Sprints for pre-billing #active ⏫ ✅ 2026-06-09
+- [x] Individual users & cloud agents: show-stopper? To find out expectations #active ⏫ ✅ 2026-06-12
+- [x] New task for AI Gov - https://youtrack.jetbrains.com/issue/JCP-4505/AI-Access-display-a-warning-when-the-user-has-no-eligible-licenses #active ✅ 2026-06-11
+- [x] Stop requirement discussions for trials (write response to Artem) #active 🔺 ✅ 2026-06-10
+- [x] Update PRD plan - https://docs.google.com/document/d/1e-5zqOmKXIA4OgoymXp7snM6tUQnejDGyFiL8Wi2vGQ/edit?tab=t.5yokqoah02rd#heading=h.6eaxmjax36h8 #active ✅ 2026-06-11
+- [-] Gantt for Pre-billing #active ❌ 2026-06-12
+- [x] Limit management API (M.Filippov) #active ⏫ ✅ 2026-06-12
+- [x] AIA Seats minutes #active 🔺 ✅ 2026-06-11
+- [x] AI access for Junie Minutes #active 🔺 ✅ 2026-06-12
+- [x] Minutes ai access disabled flag in BAD #active 🔺 ✅ 2026-06-23
 - [x] Open question: AIF or AIP allowance ✅ 2026-03-31
 - [x] (LLM) Strange critical bug https://youtrack.jetbrains.com/issue/JBAIP-762/Unable-to-update-Grazie-Platform-in-monorepo-due-to-unresolved-transitive-dependency-tanvd.konfykonfy0.1.30 ✅ 2026-03-31
 - [x] (Data Analysts) Check distribution https://youtrack.jetbrains.com/issue/JBAI-20223/Distribution-of-companies-by-the-number-of-license-periods #active ✅ 2026-04-01
@@ -78,3 +114,25 @@
 - [x] Pre-prod working group + 1 hour meeting (Gleb + Kirill + A.Sizov + Pavel N.) #active ✅ 2026-05-04
 - [x] What's wrong with issuing org service account tokens? #active ✅ 2026-05-05
 - [x] Minutes recurrent top-ups #active ⏫ ✅ 2026-05-07
+- [x] New protocol of communication between AI tools <-> Pre-billing <-> BAD #active ✅ 2026-05-19
+- [x] Dogfooding JB - team lead role? (Artem) #monitoring ⏫ ✅ 2026-05-19
+- [x] Can we freeze AI licenses after migration? (question to Sergey Coox) https://youtrack.jetbrains.com/issue/BAD-21711/Disable-AI-Pro-Ultimate-license #monitoring ✅ 2026-05-22
+- [x] Banner for AIP/AIPU licenses on the web site #monitoring ✅ 2026-05-22
+- [x] Retrospective Licensing and Billing team #active ⏫ ✅ 2026-05-19
+- [x] Dogfooding bug tracking process #active ⏫ ✅ 2026-05-20
+- [x] Coordinate Wire #active ⏫ ✅ 2026-05-19
+- [x] Anti-fraud plans and scope for pre-billing #monitoring ✅ 2026-05-22
+- [x] Pre-billing tasks clean-up https://youtrack.jetbrains.com/issue/JCP-1289/PAYG-AI-Seats-and-Billing-for-EAP-Design-Partners #active ✅ 2026-05-19
+- [x] JCP-BAD corner case: changing customer type: personal → organization #active ✅ 2026-05-18
+- [x] Linked accounts - find affected companies #active ✅ 2026-05-19
+- [x] Wire legal issue on Viktor #monitoring ⏫ ✅ 2026-05-22
+- [x] BYOK Blockers (https://youtrack.jetbrains.com/issue/JBAIP-993/AWS-Bedrock-Add-models-to-work-as-a-template-for-AIM, https://youtrack.jetbrains.com/issue/JBAIP-989/New-endpoint-to-get-models-for-management-needs) #active ⏫ ✅ 2026-05-13
+- [x] AIA minutes #active 🔺 ✅ 2026-05-07
+- [x] Limit migration -- defaults? #active ✅ 2026-05-18
+- [x] How do trials work in backward compatibility mode (Viktor Kiselev) #active 🔺 ✅ 2026-05-20
+- [x] Paid seats meeting notes #active 🔺 ✅ 2026-05-26
+- [x] APP/DUL credit migration - how? Alla #active 🔺 ✅ 2026-05-21
+- [x] Individual users migration --> BAD! #active ⏫ ✅ 2026-06-03
+- [x] Trial meeting notes #active 🔺 ✅ 2026-05-22
+- [x] Meeting with Viktor Belenkiy - trials #active 🔺 ✅ 2026-05-26
+- [x] Inform AIA about release date #active ⏫ ✅ 2026-06-03
