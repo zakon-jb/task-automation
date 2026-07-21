@@ -1,15 +1,20 @@
 #!/usr/bin/env python3
-"""Report JCP issues *completed* in recent TeamCity builds of a build config.
+"""Report JCP issues *completed* in recent TeamCity builds of several services.
 
-Pulls successful builds from the last N days (default 7), reads each build's
-related issues via the TeamCity REST API, and keeps only JCP-* issues that were
-COMPLETED in that build. An issue counts as completed in a build when BOTH:
+For each service (Quota, Auth) it pulls successful image builds from the last N
+days (default 7), reads each build's related issues via the TeamCity REST API,
+and keeps only JCP-* issues that were COMPLETED in that build. An issue counts
+as completed in a build when BOTH:
   1. it is resolved in YouTrack (its State is a resolved-type state), AND
   2. the build contains the issue's LAST linked commit (the newest VCS change
      referencing the issue, by date, across all builds).
 This attributes each issue to the single build that shipped its final commit,
 and drops issues that are not yet resolved. Each kept issue is enriched with its
-subject and assignee from YouTrack.
+subject and assignee from YouTrack, and mapped to the prod deploy that carried
+it (by walking the deploy's build chain down to the image it shipped).
+
+Output: one deployments table per service, then a combined issues table whose
+"Deployment" column shows the deployed version + time per applicable service.
 
 Auth:
   - TeamCity access token: --token or the TC_TOKEN env var.
@@ -27,15 +32,30 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 
 DEFAULT_SERVER = "https://jetbrains-ai.internal.teamcity.cloud"
 DEFAULT_YT_SERVER = "https://youtrack.jetbrains.com"
-DEFAULT_BUILD_CONFIG = "Deployments_GrazieAppQuotaJibBuild"
-# Prod deployment config; the build chain leads image builds here on release.
-DEFAULT_PROD_CONFIG = "Deployments_App_Quota_Prod_ServiceEKSDeployment_EuWest1"
+
+# Services to report on. Each has an image ("build & push") config and the prod
+# deployment config the build chain leads to on release.
+SERVICES = [
+    {
+        "name": "Quota",
+        "image_config": "Deployments_GrazieAppQuotaJibBuild",
+        "prod_config": "Deployments_App_Quota_Prod_ServiceEKSDeployment_EuWest1",
+    },
+    {
+        "name": "Auth",
+        "image_config": "Deployments_GrazieAuthServiceJibBuild",
+        "prod_config": "Deployments_App_Auth_Prod_SpaceToECRPush_EuWest1",
+    },
+]
 JCP_RE = re.compile(r"JCP-\d+")
 # TeamCity date format, e.g. 20260720T154939+0000
 TC_DATE_FMT = "%Y%m%dT%H%M%S%z"
+# Display timezone: Central European Time (CET in winter, CEST in summer).
+DISPLAY_TZ = ZoneInfo("Europe/Berlin")
 
 
 def api_get(server, token, path, query=None, fatal=True):
@@ -106,16 +126,27 @@ def fetch_yt_details(yt_server, yt_token, issue_ids):
             "assignee": assignee,
             "state": state,
             "resolved": bool(data.get("resolved")),
+            "resolved_ms": data.get("resolved"),  # epoch millis, or None
             "latest_version": (latest or {}).get("version"),
         }
     return details
 
 
 def fmt_dt(tc_date):
+    """Format a TeamCity timestamp in the display timezone (CET/CEST)."""
     try:
-        return datetime.strptime(tc_date, TC_DATE_FMT).strftime("%Y-%m-%d %H:%M UTC")
+        dt = datetime.strptime(tc_date, TC_DATE_FMT).astimezone(DISPLAY_TZ)
+        return dt.strftime("%Y-%m-%d %H:%M %Z")
     except (ValueError, TypeError):
         return tc_date or "?"
+
+
+def fmt_epoch_ms(ms):
+    """Format a YouTrack epoch-millis timestamp in CET/CEST, or '—' if absent."""
+    if not ms:
+        return "—"
+    dt = datetime.fromtimestamp(ms / 1000, tz=timezone.utc).astimezone(DISPLAY_TZ)
+    return dt.strftime("%Y-%m-%d %H:%M %Z")
 
 
 def parse_tc(dt):
@@ -208,39 +239,22 @@ def deploy_for_build(build, deploys):
     return best
 
 
-def main():
-    p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--token", default=os.environ.get("TC_TOKEN"),
-                   help="TeamCity access token (default: $TC_TOKEN)")
-    p.add_argument("--yt-token", default=os.environ.get("YT_TOKEN"),
-                   help="YouTrack token for subjects/assignees (default: $YT_TOKEN)")
-    p.add_argument("--yt-server", default=DEFAULT_YT_SERVER)
-    p.add_argument("--server", default=DEFAULT_SERVER)
-    p.add_argument("--build-config", default=DEFAULT_BUILD_CONFIG,
-                   help=f"image buildType id (default: {DEFAULT_BUILD_CONFIG})")
-    p.add_argument("--prod-config", default=DEFAULT_PROD_CONFIG,
-                   help="prod deployment buildType id the chain leads to "
-                        f"(default: {DEFAULT_PROD_CONFIG})")
-    p.add_argument("--days", type=int, default=7,
-                   help="how many days back to include (default: 7)")
-    p.add_argument("--json", action="store_true",
-                   help="emit machine-readable JSON instead of Markdown")
-    args = p.parse_args()
+def collect_service(args, svc, since_str, yt):
+    """Build the report for one service. Returns dict with name, scanned count,
+    dropped count, and `report` (builds with completed JCP issues). `yt` is a
+    shared YouTrack-details cache to avoid refetching ids across services.
 
-    if not args.token:
-        sys.exit("ERROR: no token. Pass --token or set TC_TOKEN.")
-    if not args.yt_token:
-        sys.exit("ERROR: no YouTrack token. The completion logic (resolved state "
-                 "+ last commit) requires it. Pass --yt-token or set YT_TOKEN.")
-
-    since = datetime.now(timezone.utc) - timedelta(days=args.days)
-    since_str = since.strftime(TC_DATE_FMT)
+    Each kept issue is annotated with `service`, `deploy_version` (the prod
+    version that shipped it), `deploy_date` (formatted) and `deploy_pending`.
+    """
+    image_config = svc["image_config"]
+    prod_config = svc["prod_config"]
 
     builds = api_get(
         args.server, args.token, "/app/rest/builds",
         {
             # status:SUCCESS + state:finished => only successful, completed builds.
-            "locator": (f"buildType:{args.build_config},sinceDate:{since_str},"
+            "locator": (f"buildType:{image_config},sinceDate:{since_str},"
                         "status:SUCCESS,state:finished,count:1000"),
             "fields": "count,build(id,number,status,startDate,webUrl)",
         },
@@ -259,7 +273,6 @@ def main():
             iid = issue.get("id", "")
             if not JCP_RE.fullmatch(iid or ""):
                 continue
-            # SHAs of the commits in THIS build that reference the issue.
             versions = [c.get("version")
                         for c in usage.get("changes", {}).get("change", [])
                         if c.get("version")]
@@ -279,11 +292,11 @@ def main():
                 ],
             })
 
-    # Enrich from YouTrack, then keep only issues COMPLETED in this build:
-    # resolved AND the issue's last linked commit is one of this build's commits.
-    all_ids = sorted({i["id"] for b in report for i in b["jcp_issues"]},
-                     key=lambda x: int(x.split("-")[1]))
-    yt = fetch_yt_details(args.yt_server, args.yt_token, all_ids)
+    # Enrich from YouTrack (shared cache), then keep only COMPLETED issues.
+    need = sorted({i["id"] for b in report for i in b["jcp_issues"]
+                   if i["id"] not in yt},
+                  key=lambda x: int(x.split("-")[1]))
+    yt.update(fetch_yt_details(args.yt_server, args.yt_token, need))
     dropped = 0
     for b in report:
         kept = []
@@ -296,6 +309,8 @@ def main():
             i["assignee"] = d["assignee"]
             i["state"] = d["state"]
             i["resolved"] = d["resolved"]
+            i["resolved_ms"] = d["resolved_ms"]
+            i["resolved_date"] = fmt_epoch_ms(d["resolved_ms"])
             latest = d["latest_version"]
             i["is_last_revision"] = bool(latest and latest in i["versions"])
             if i["resolved"] and i["is_last_revision"]:
@@ -305,58 +320,135 @@ def main():
         b["jcp_issues"] = kept
     report = [b for b in report if b["jcp_issues"]]
 
-    # For each reported image build, find when it reached prod. Start from the
-    # prod deploys, resolve the image each shipped, then attribute each build to
-    # the earliest deploy that shipped an image >= that build (a deploy carries
-    # every build since the previously deployed version).
+    # Map each build to the prod deploy that carried it, then annotate issues.
     deploys = resolve_prod_deploys(
-        args.server, args.token, args.prod_config, args.build_config, since_str)
+        args.server, args.token, prod_config, image_config, since_str)
     for b in report:
-        dep = deploy_for_build(b, deploys)  # None if not yet deployed to prod
+        dep = deploy_for_build(b, deploys)
         b["prod_deploy"] = dep
         b["prod_deployed_fmt"] = fmt_dt(dep["startDate"]) if dep else None
+        for i in b["jcp_issues"]:
+            i["service"] = svc["name"]
+            i["deploy_version"] = dep["image"]["number"] if dep else None
+            i["deploy_date"] = b["prod_deployed_fmt"] if dep else None
+            i["deploy_started"] = dep["startDate"] if dep else None  # raw TC date
+            i["deploy_pending"] = dep is None
 
-    if args.json:
-        print(json.dumps({
-            "build_config": args.build_config,
-            "prod_config": args.prod_config,
-            "days": args.days,
-            "since": since_str,
-            "builds_scanned": len(builds),
-            "jcp_candidates_dropped": dropped,
-            "builds_with_completed_jcp": report,
-        }, indent=2))
-        return
+    return {
+        "name": svc["name"],
+        "image_config": image_config,
+        "prod_config": prod_config,
+        "scanned": len(builds),
+        "dropped": dropped,
+        "report": report,
+    }
 
-    print(f"# JCP issues completed in `{args.build_config}` — last {args.days} days")
-    print(f"_Scanned {len(builds)} successful build(s) since {fmt_dt(since_str)}; "
-          f"{len(report)} shipped a completed JCP issue "
-          f"({dropped} JCP candidate(s) dropped as unresolved or not the last "
-          f"revision)._\n")
+
+def print_deploy_table(svc_result):
+    print(f"## {svc_result['name']} deployments\n")
+    report = svc_result["report"]
     if not report:
-        print("No successful builds completed a JCP issue in this window.")
+        print("_No successful builds completed a JCP issue in this window._\n")
         return
+    print("| Build (image) | Image built | Deployed to prod | JCP issues |")
+    print("|---------------|-------------|------------------|------------|")
     for b in report:
-        status = "" if b["status"] == "SUCCESS" else f" ({b['status']})"
-        print(f"## Build {b['number']}{status}")
+        build = b["number"] + ("" if b["status"] == "SUCCESS"
+                               else f" ({b['status']})")
         if b["prod_deploy"]:
             pd = b["prod_deploy"]
             shipped = pd["image"]["number"]
-            via = "" if shipped == b["number"] else f", shipped in {shipped}"
-            prod = (f"{b['prod_deployed_fmt']} "
-                    f"(prod deploy #{pd['number']}{via})")
+            via = "" if shipped == b["number"] else f" → {shipped}"
+            prod = f"{b['prod_deployed_fmt']} (#{pd['number']}{via})"
         else:
-            prod = "not yet deployed to prod (pending)"
-        print(f"- **Image built:** {b['started_fmt']}")
-        print(f"- **Deployed to prod:** {prod}")
-        print(f"- {b['webUrl']}\n")
-        print("| JCP issue | Subject | Assignee |")
-        print("|-----------|---------|----------|")
-        for i in b["jcp_issues"]:
-            subject = (i.get("summary") or "_(unavailable)_").replace("|", "\\|")
-            assignee = i.get("assignee") or "—"
-            print(f"| [{i['id']}]({i['url']}) | {subject} | {assignee} |")
-        print()
+            prod = "not yet deployed (pending)"
+        issues = ", ".join(f"[{i['id']}]({i['url']})" for i in b["jcp_issues"])
+        print(f"| {build} | {b['started_fmt']} | {prod} | {issues} |")
+    print()
+
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__)
+    p.add_argument("--token", default=os.environ.get("TC_TOKEN"),
+                   help="TeamCity access token (default: $TC_TOKEN)")
+    p.add_argument("--yt-token", default=os.environ.get("YT_TOKEN"),
+                   help="YouTrack token for subjects/assignees (default: $YT_TOKEN)")
+    p.add_argument("--yt-server", default=DEFAULT_YT_SERVER)
+    p.add_argument("--server", default=DEFAULT_SERVER)
+    p.add_argument("--days", type=int, default=7,
+                   help="how many days back to include (default: 7)")
+    p.add_argument("--json", action="store_true",
+                   help="emit machine-readable JSON instead of Markdown")
+    args = p.parse_args()
+
+    if not args.token:
+        sys.exit("ERROR: no token. Pass --token or set TC_TOKEN.")
+    if not args.yt_token:
+        sys.exit("ERROR: no YouTrack token. The completion logic (resolved state "
+                 "+ last commit) requires it. Pass --yt-token or set YT_TOKEN.")
+
+    since = datetime.now(timezone.utc) - timedelta(days=args.days)
+    since_str = since.strftime(TC_DATE_FMT)
+
+    yt = {}
+    results = [collect_service(args, svc, since_str, yt) for svc in SERVICES]
+
+    if args.json:
+        print(json.dumps({
+            "days": args.days,
+            "since": since_str,
+            "services": results,
+        }, indent=2))
+        return
+
+    print(f"# JCP issues completed & deployed — last {args.days} days")
+    parts = [f"{r['name']}: {len(r['report'])} build(s), {r['dropped']} dropped"
+             for r in results]
+    print(f"_Since {fmt_dt(since_str)}. {'; '.join(parts)}._\n")
+
+    # One deployments table per service.
+    for r in results:
+        print_deploy_table(r)
+
+    # Combined issues table. An issue is attributed to one build per service;
+    # aggregate per id across services for the Deployment column.
+    all_issues = {}  # id -> issue (first seen)
+    deployments = {}  # id -> list of "Service version (date)" strings
+    deploy_sort = {}  # id -> datetime to sort by (latest deploy across services)
+    for r in results:
+        for b in r["report"]:
+            for i in b["jcp_issues"]:
+                all_issues.setdefault(i["id"], i)
+                if i["deploy_pending"]:
+                    cell = f"{i['service']} (pending)"
+                    dt = datetime.max.replace(tzinfo=timezone.utc)  # pending first
+                else:
+                    cell = f"{i['service']} {i['deploy_version']} ({i['deploy_date']})"
+                    dt = parse_tc(i["deploy_started"]) or datetime.min.replace(
+                        tzinfo=timezone.utc)
+                deployments.setdefault(i["id"], []).append(cell)
+                prev = deploy_sort.get(i["id"])
+                if prev is None or dt > prev:
+                    deploy_sort[i["id"]] = dt
+
+    print("## JCP Issues\n")
+    print("| JCP issue | Subject | Assignee | Status | Resolved | Deployment |")
+    print("|-----------|---------|----------|--------|----------|------------|")
+    # Sort by deployment time (latest first); ties broken by JCP number desc.
+    order = sorted(all_issues,
+                   key=lambda x: (deploy_sort.get(x, datetime.min.replace(
+                       tzinfo=timezone.utc)), int(x.split("-")[1])),
+                   reverse=True)
+    for iid in order:
+        i = all_issues[iid]
+        subject = (i.get("summary") or "_(unavailable)_").replace("|", "\\|")
+        assignee = i.get("assignee") or "—"
+        state = i.get("state") or "—"
+        resolved = i.get("resolved_date") or "—"
+        deploy = "; ".join(deployments.get(iid, [])) or "—"
+        print(f"| [{iid}]({i['url']}) | {subject} | {assignee} | {state} "
+              f"| {resolved} | {deploy} |")
+    print()
 
 
 if __name__ == "__main__":

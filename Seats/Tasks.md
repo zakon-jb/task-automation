@@ -6,15 +6,25 @@
 - [ ] DataSpell
 - [ ] Refund - how it works with Allowances?
 - [ ] Revenue recognition service - developer? M. Naumenko?
-- [ ] Bug with upgrade on the day of migration - check priority with Blagutin #active 
+- [x] Bug with upgrade on the day of migration - check priority with Blagutin https://youtrack.jetbrains.com/issue/JCP-5345/License-downgrade-can-be-used-to-abuse-credit-source-system #active ✅ 2026-07-16
 - [x] Test org in prod - https://youtrack.jetbrains.com/issue/JCP-5323/Test-Org-in-Prod #active ⏫ ✅ 2026-07-08
-- [/] Junie feature flag - to enable after June 13 #active ⏫
+- [/] Junie feature flag - to enable after June 13 #active
 - [ ] BAD - disable ai access management after migration? #active 
 - [x] Magioli - credit amount? #active 🔺 ✅ 2026-07-10
-- [/] Q3 - sizing?? #active ⏫
-- [ ] Sprint planning pre-billing #active ⏫
+- [x] Q3 - sizing?? #active ⏫ ✅ 2026-07-16
+- [/] Sprint planning pre-billing #active ⏫
 - [x] Credit amount reports to customers #active 🔺 ✅ 2026-07-13
 - [/] AIA --> Full Seats Support? #active ⏫
+- [/] Revenue recognition ETA next Monday #active ⏫
+- [x] China stop - communication to BAD? #active 🔺 ✅ 2026-07-20
+- [x] Consistency check in license migration #active ⏫ ✅ 2026-07-20
+- [x] Task for BAD - sunset AIP/AIPU for orgs #active 🔺 ✅ 2026-07-20
+- [x] Edge cases for migration - transfer license, refund, abuse #active ⏫ ✅ 2026-07-20
+- [x] Draft of credit calculation logic #active ⏫ ✅ 2026-07-20
+- [/] Trials rollout #active 🔺
+- [ ] Find TeamCity configuration for deploy to Prod #active 
+- [/] Analytics for account balances - ETA? #active ⏫
+- [/] R# Native seats support #active
 
 ## Archive
 

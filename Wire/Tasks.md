@@ -1,8 +1,9 @@
 ## Backlog
 
-- [ ] CLI - Prepare for the planning session #active
-- [ ] CLI - Task for what's new #active 
+- [ ] CLI - Prepare for the planning session
+- [x] CLI - Task for what's new #active ✅ 2026-07-16
 - [x] CLI - plans for EAP Global: BYOK (eow), Service Accounts (next week), Junie (end of July), OpenCode & MCP - next #active ⏫ ✅ 2026-07-09
+- [/] Handover CLI to Maria #active
 
 ## Archive
 

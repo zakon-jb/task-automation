@@ -13,7 +13,14 @@
       "WebFetch(domain:docs.cloud.google.com)",
       "WebFetch(domain:ai.google.dev)",
       "Bash(curl -s -A \"Mozilla/5.0\" \"https://docs.cloud.google.com/vertex-ai/generative-ai/docs/learn/model-versions\" -o /tmp/vertex.html)",
-      "Read(//tmp/**)"
+      "Read(//tmp/**)",
+      "WebFetch(domain:jetbrains-ai.internal.teamcity.cloud)",
+      "Bash(env)",
+      "Read(//Users/konstantin.zaporozhtsev/**)",
+      "Read(//Users/konstantin.zaporozhtsev/.config/**)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)"
     ]
   }
 }
