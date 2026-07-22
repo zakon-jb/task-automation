@@ -14,4 +14,13 @@ if [[ ! -f "$DIR/secrets.env" ]]; then
 fi
 source "$DIR/secrets.env"
 
-exec /usr/bin/python3 "$DIR/daily_deploy_slack.py" --days 1
+# Look back far enough to cover the gap since the last run. On Monday (weekday 1)
+# reach back 3 days so Friday + weekend deploys are included; otherwise just
+# yesterday. `date +%u`: 1=Mon … 7=Sun.
+if [[ "$(date +%u)" == "1" ]]; then
+  DAYS=3
+else
+  DAYS=1
+fi
+
+exec /usr/bin/python3 "$DIR/daily_deploy_slack.py" --days "$DAYS"
