@@ -6,13 +6,13 @@
 - [ ] DataSpell
 - [ ] Refund - how it works with Allowances?
 - [ ] Revenue recognition service - developer? M. Naumenko?
-- [x] Bug with upgrade on the day of migration - check priority with Blagutin https://youtrack.jetbrains.com/issue/JCP-5345/License-downgrade-can-be-used-to-abuse-credit-source-system #active ✅ 2026-07-16
+- [ ] Bug with upgrade on the day of migration - check priority with Blagutin #active 
 - [x] Test org in prod - https://youtrack.jetbrains.com/issue/JCP-5323/Test-Org-in-Prod #active ⏫ ✅ 2026-07-08
-- [/] Junie feature flag - to enable after June 13 #active
+- [/] Junie feature flag - to enable after June 13 #active ⏫
 - [ ] BAD - disable ai access management after migration? #active 
 - [x] Magioli - credit amount? #active 🔺 ✅ 2026-07-10
-- [x] Q3 - sizing?? #active ⏫ ✅ 2026-07-16
-- [/] Sprint planning pre-billing #active ⏫
+- [/] Q3 - sizing?? #active ⏫
+- [ ] Sprint planning pre-billing #active ⏫
 - [x] Credit amount reports to customers #active 🔺 ✅ 2026-07-13
 - [/] AIA --> Full Seats Support? #active ⏫
 - [/] Revenue recognition ETA next Monday #active ⏫

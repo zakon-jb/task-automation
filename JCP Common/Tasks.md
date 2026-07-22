@@ -2,7 +2,7 @@
 
 - [ ] JCP Security audit #monitoring ⏫
 - [ ] Mandatory 'Team' field in JCP + mandatory milestone for epics/features + inheritance
-- [/] IdP + OpenAI security identifier conflict #active
+- [/] IdP + OpenAI security identifier conflict #active ⏫
 - [ ] Security issues for EAP Global #monitoring
 - [ ] IDE (AIA) tasks management #active ⏫
 

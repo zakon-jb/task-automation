@@ -6,7 +6,6 @@
 - [ ] Dmitry Borin: we need a multi-reg for Pre-prod (maybe not from the beginning)
 - [ ] Gleb: access to envs (staging / prod) #monitoring
 - [ ] Deployment status in YT #active 
-- [/] Handover tech sync to Nadia #active
 
 ## Archive
 
