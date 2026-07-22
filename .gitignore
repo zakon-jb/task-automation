@@ -1,5 +1,7 @@
 **/.DS_Store
 **/*-token
+**/secrets.env
 .idea/
 **/*.iml
 .air/
+.claude/settings.local.json

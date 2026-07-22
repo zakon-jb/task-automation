@@ -25,6 +25,7 @@
 - [ ] Find TeamCity configuration for deploy to Prod #active 
 - [/] Analytics for account balances - ETA? #active ⏫
 - [/] R# Native seats support #active
+- [/] Blocklist #active ⏫
 
 ## Archive
 
